@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="diffrobot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Include Gazebo specific URDF adjustments -->
+    <xacro:include filename="$(find diffrobot_description)/urdf/diffrobot.gazebo"/>
+    
+    <link name="robot_footprint"/>
+
+    <joint name="robot_footprint_joint" type="fixed">
+        <origin xyz="0 0 0.0" rpy="0 0 0"/>
+        <parent link="robot_footprint"/>
+        <child link="base_link"/>
+    </joint>  
+
+    <link name="base_link">
+        <inertial>
+            <origin xyz="-0.000386137718732471 -0.000791179831057393 0.00553857722692014" rpy="0 0 0"/>
+            <mass value="1.17032405036154"/>
+            <inertia ixx="0.00560012260274281" ixy="-2.8148294238752E-05" ixz="-4.35422299542442E-08"
+                     iyy="0.00608298209686235" iyz="1.88030099173909E-07" izz="0.0116529547581839"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://diffrobot_description/meshes/base_link.STL"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.298039215686275 0.298039215686275 0.298039215686275 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://diffrobot_description/meshes/base_link.STL"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="left_wheel">
+        <inertial>
+            <origin xyz="-6.237294569722E-10 5.53168122419123E-10 3.99078106117778E-05" rpy="0 0 0"/>
+            <mass value="0.0351748274027844"/>
+            <inertia ixx="1.52374622692674E-05" ixy="3.70758849531513E-10" ixz="5.67024276094885E-14"
+                     iyy="1.52368001729032E-05" iyz="-4.86979474529327E-14" izz="2.57858860938303E-05"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://diffrobot_description/meshes/left_wheel.STL"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.333333333333333 0.333333333333333 0.333333333333333 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://diffrobot_description/meshes/left_wheel.STL"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="left_wheel_joint" type="continuous">
+        <origin xyz="-0.00710637918445828 0.116142863973606 -0.0732444872895927" rpy="1.5707963267949 0 0.0581334826095967"/>
+        <parent link="base_link"/>
+        <child link="left_wheel"/>
+        <axis xyz="0 0 -1"/>
+    </joint>
+
+    <link name="right_wheel">
+        <inertial>
+            <origin xyz="-8.58566440165021E-10 2.46938997028323E-11 3.99077934541726E-05" rpy="0 0 0"/>
+            <mass value="0.0351748274831476"/>
+            <inertia ixx="1.52367980613616E-05" ixy="3.68845709547916E-10" ixz="6.9358924959867E-14"
+                     iyy="1.52374644129476E-05" iyz="8.10596171668894E-15" izz="2.57858861191368E-05"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://diffrobot_description/meshes/right_wheel.STL"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.333333333333333 0.333333333333333 0.333333333333333 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://diffrobot_description/meshes/right_wheel.STL"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="right_wheel_joint" type="continuous">
+        <origin xyz="0.00626940821510985 -0.113685379087004 -0.073244487289593" rpy="-1.5707963267949 0 0.0581334826095967"/>
+        <parent link="base_link"/>
+        <child link="right_wheel"/>
+        <axis xyz="0 0 -1"/>
+    </joint>
+
+    <link name="front_caster">
+        <inertial>
+            <origin xyz="0 0.00262548022336079 0.00782423038311422" rpy="0 0 0"/>
+            <mass value="0.138185712842945"/>
+            <inertia ixx="1.6095697626213E-05" ixy="3.9398455077299E-21" ixz="1.96398248021837E-20"
+                     iyy="2.36807747991614E-05" iyz="3.49950426187175E-06" izz="3.28973005722072E-05"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://diffrobot_description/meshes/front_caster.STL"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.650980392156863 0.619607843137255 0.588235294117647 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://diffrobot_description/meshes/front_caster.STL"/>
+            </geometry>
+        </collision>
+    </link>   
+  <joint
+    name="front_caster_joint"
+    type="fixed">
+    <origin
+      xyz="0.114387247881423 0.00791032805395803 -0.0992444872895926"
+      rpy="0.324425461774425 0 1.62892980940449" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_caster" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="back_caster">
+    <inertial>
+      <origin
+        xyz="0 0.00825298106839455 5.56561112277643E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.138185712842945" />
+      <inertia
+        ixx="1.60956976262129E-05"
+        ixy="-1.92679602198523E-21"
+        ixz="-1.14039026352449E-21"
+        iyy="3.40754530956607E-05"
+        iyz="-3.68962750472635E-09"
+        izz="2.2502622275708E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://diffrobot_description/meshes/back_caster.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://diffrobot_description/meshes/back_caster.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="back_caster_joint"
+    type="fixed">
+    <origin
+      xyz="-0.115224218850772 -0.00545284316735611 -0.0992444872895926"
+      rpy="1.5707963267949 0 1.62892980940449" />
+    <parent
+      link="base_link" />
+    <child
+      link="back_caster" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="laser_link">
+    <inertial>
+      <origin
+        xyz="0.00579970559221482 0.000258230972795676 0.00393830935698658"
+        rpy="0 0 0" />
+      <mass
+        value="0.142994088585112" />
+      <inertia
+        ixx="4.62524385712295E-05"
+        ixy="2.60191813653443E-07"
+        ixz="3.61045916113698E-06"
+        iyy="7.3498913720135E-05"
+        iyz="-3.52192840706552E-07"
+        izz="0.000107960176632734" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://diffrobot_description/meshes/laser_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.101960784313725 0.101960784313725 0.101960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://diffrobot_description/meshes/laser_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="laser_joint"
+    type="fixed">
+    <origin
+      xyz="-0.00192495005751631 0.00287766412703641 0.162855512710407"
+      rpy="0 0 0.0581334826095967" />
+    <parent
+      link="base_link" />
+    <child
+      link="laser_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="imu_link">
+    <inertial>
+      <origin
+        xyz="-0.00165543492258308 -0.00010775449874631 0.000448051321485468"
+        rpy="0 0 0" />
+      <mass
+        value="0.000529368756416077" />
+      <inertia
+        ixx="1.3329198677734E-08"
+        ixy="-5.6052563819805E-12"
+        ixz="6.24714695503304E-14"
+        iyy="7.56085396876583E-09"
+        iyz="-7.11330543163027E-19"
+        izz="1.99747900438089E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://diffrobot_description/meshes/imu_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://diffrobot_description/meshes/imu_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="imu_joint"
+    type="fixed">
+    <origin
+      xyz="0.0865539909155635 0.00639982999922947 -0.0614359872895926"
+      rpy="0 0 0.0581334826095967" />
+    <parent
+      link="base_link" />
+    <child
+      link="imu_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>
